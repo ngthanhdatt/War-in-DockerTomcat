@@ -1,62 +1,34 @@
 pipeline {
     agent any
-	
-	  tools
-    {
-       maven "Maven"
+    tools {
+        maven "maven-3"
     }
- stages {
-      stage('checkout') {
-           steps {
-             
-                git branch: 'master', url: 'https://github.com/devops4solutions/CI-CD-using-Docker.git'
-             
-          }
-        }
-	 stage('Execute Maven') {
-           steps {
-             
-                sh 'mvn package'             
-          }
-        }
-        
-
-  stage('Docker Build and Tag') {
-           steps {
-              
-                sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:latest'
-                //sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:$BUILD_NUMBER'
-               
-          }
-        }
-     
-  stage('Publish image to Docker Hub') {
-          
-            steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push nikhilnidhi/samplewebapp:latest'
-        //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
-        }
-                  
-          }
-        }
-     
-      stage('Run Docker container on Jenkins Agent') {
-             
-            steps 
-			{
-                sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
- 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('ngthanhdat-dockerhub')
+    }
+    stages {
+    	stage('SCM checkout'){
+    		steps{
+    			git branch: 'main', credentialsId: 'bb6853db-1e2f-4240-94e8-d68945d47968', url: 'https://github.com/ngthanhdatt/War-in-DockerTomcat.git'
+    		}
+    	}
+        stage('Build'){
+            steps{
+           		sh 'mvn clean package'
             }
         }
- stage('Run Docker container on remote hosts') {
-             
+        stage('Deploy') {
             steps {
-                sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 nikhilnidhi/samplewebapp"
- 
+                sh 'docker build -t loginapp:latest .'
+                sh 'docker tag loginapp ngthanhdat/loginapp:latest'
+                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+                sh 'docker push ngthanhdat/loginapp:latest'
             }
         }
-    }
-	}
-    
+        stage('Release') {
+        	steps {
+        		sh 'docker run -it -dp 8082:8080 ngthanhdat/loginapp:latest'
+        	}
+        }
+     }
+}
