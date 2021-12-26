@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'docker build -t loginapptomcat:latest .'
-                sh 'docker tag loginapp ngthanhdat/loginapptomcat:latest'
+                sh 'docker tag loginapptomcat ngthanhdat/loginapptomcat:latest'
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
                 sh 'docker push ngthanhdat/loginapptomcat:latest'
             }
