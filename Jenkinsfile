@@ -19,15 +19,15 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker build -t loginapp:latest .'
-                sh 'docker tag loginapp ngthanhdat/loginapp:latest'
+                sh 'docker build -t loginapptomcat:latest .'
+                sh 'docker tag loginapptomcat ngthanhdat/loginapptomcat:latest'
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
-                sh 'docker push ngthanhdat/loginapp:latest'
+                sh 'docker push ngthanhdat/loginapptomcat:latest'
             }
         }
         stage('Release') {
         	steps {
-        		sh 'docker run -it -dp 8082:8080 ngthanhdat/loginapp:latest'
+        		sh 'docker run -it -dp 8082:8080 ngthanhdat/loginapptomcat:latest'
         	}
         }
      }
