@@ -5,12 +5,14 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ] 
-
+    
+  workflow_dispatch:
+  
 # 1 workflow se co nhieu task duoc chay tuan tu hoac song song
 jobs:
   build:
 
-    runs-on: centos-latest
+    runs-on: ubuntu-latest
 
     #c cac nhiem vu se duoc chay
 
