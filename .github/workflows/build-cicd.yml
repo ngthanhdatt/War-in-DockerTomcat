@@ -43,9 +43,10 @@ jobs:
       uses: docker/setup-buildx-action@v1
       id: buildx
   
-    - name: Get current time
-      uses: gerred/actions/current-time@master
-      id: current-time
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      
       
     # task build images va push len dockerhub
     - name: Build and Push Docker Image
@@ -59,7 +60,7 @@ jobs:
         # build xong push
         push: true
         # danh tag image
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/loginapptomcat:${{ steps.current-time.outputs.time }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/loginapptomcat:${{ steps.date.outputs.date }}
 
 
 
