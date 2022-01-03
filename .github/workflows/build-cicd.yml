@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ] 
     
-  workflow_dispatch:
+  # workflow_dispatch:
   
 # 1 workflow se co nhieu task duoc chay tuan tu hoac song song
 jobs:
