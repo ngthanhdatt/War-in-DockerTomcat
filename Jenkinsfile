@@ -27,6 +27,13 @@ pipeline {
         }
         stage('Release') {
         	steps {
+                /* ids=$(docker ps -a -q)
+                    for id in $ids
+                    do
+                        echo "$id"
+                        docker stop $id && docker rm $id
+                    done
+                */
         		sh 'docker run -it -dp 8082:8080 ngthanhdat/loginapptomcat:latest'
         	}
         }
