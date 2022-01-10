@@ -3,8 +3,8 @@ name: war-in-dockertomcat
 on:
   push:
     branches: [ main ]
-  pull:
-    branches: [ main ] 
+#   pull:
+#     branches: [ main ] 
     
   # workflow_dispatch:
   
