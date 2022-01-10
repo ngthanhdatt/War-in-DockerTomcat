@@ -15,6 +15,6 @@ RUN rm -rf /opt/tomcat/webapps/*
 
 COPY target/LoginWebApp-1.war /opt/tomcat/webapps/
 
-EXPOSE 8080
+# EXPOSE 8080
 
-CMD ["catalina.sh", "run"]
+# CMD ["catalina.sh", "run"]
