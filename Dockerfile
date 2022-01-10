@@ -11,7 +11,7 @@
 
 FROM ngthanhdat/centostomcat:latest
 
-RUN rm -f /opt/tomcat/webapps/*
+RUN rm -rf /opt/tomcat/webapps/*
 
 COPY target/LoginWebApp-1.war /opt/tomcat/webapps/
 
