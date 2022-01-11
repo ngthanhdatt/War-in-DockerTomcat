@@ -9,7 +9,7 @@ pipeline {
     stages {
     	stage('SCM checkout'){
     		steps{
-    			git branch: 'main', credentialsId: 'bb6853db-1e2f-4240-94e8-d68945d47968', url: 'https://github.com/ngthanhdatt/War-in-DockerTomcat.git'
+    			git branch: 'main', url: 'https://github.com/ngthanhdatt/War-in-DockerTomcat.git'
     		}
     	}
         stage('Build'){
