@@ -29,7 +29,7 @@ jobs:
 
     # task build project bang maven
     - name: Build with maven
-      run: mvn clean package
+      run: mvn compile package
 
     # task login docker
     - name: Login Docker Hub
@@ -39,9 +39,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
     
     # task cai dat va su dung buildx 
-    - name: Setup Docker Buildx
-      uses: docker/setup-buildx-action@v1
-      id: buildx
+#     - name: Setup Docker Buildx
+#       uses: docker/setup-buildx-action@v1
+#       id: buildx
   
     - name: Get current date
       id: date
@@ -53,14 +53,15 @@ jobs:
       uses: docker/build-push-action@v2
       id: docker_build
       with: 
-        # folder chay docker build
-        context: ./
-        file: ./Dockerfile
-        builder: ${{ steps.buildx.outputs.name }}
-        # build xong push
-        push: true
-        # danh tag image
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/loginapptomcat:${{ steps.date.outputs.date }}
+#         # folder chay docker build
+#         context: ./
+#         file: ./Dockerfile
+#         builder: ${{ steps.buildx.outputs.name }}
+#         # build xong push
+#         push: true
+#         # danh tag image
+#         tags: ${{ secrets.DOCKERHUB_USERNAME }}/loginapptomcat:${{ steps.date.outputs.date }}
+          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/loginapptomcat:${{ steps.date.outputs.date }}
 
 
 
