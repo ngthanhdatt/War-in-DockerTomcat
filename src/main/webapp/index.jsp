@@ -16,11 +16,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Your Username</td>
+                        <td>Username</td>
                         <td><input type="text" name="userName" value="" /></td>
                     </tr>
                     <tr>
-                        <td>Your Password</td>
+                        <td>Password</td>
                         <td><input type="password" name="password" value="" /></td>
                     </tr>
                     <tr>
