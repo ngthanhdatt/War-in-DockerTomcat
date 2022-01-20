@@ -27,7 +27,6 @@ pipeline {
         }
         stage('Release') {
         	steps {
-                /* stop old container */
                 /* ids=$(docker ps -a -q)
                     for id in $ids
                     do
