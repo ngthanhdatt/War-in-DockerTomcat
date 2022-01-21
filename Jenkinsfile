@@ -34,7 +34,7 @@ pipeline {
                         docker stop $id && docker rm $id
                     done
                 */
-        		sh 'docker run -it -dp 9090:8080 ngthanhdat/loginapptomcat:latest'
+        		sh 'docker run -it -dp 8082:8080 ngthanhdat/loginapptomcat:latest'
         	}
         }
      }
