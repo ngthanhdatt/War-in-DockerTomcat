@@ -11,12 +11,12 @@
             <table border="0" width="30%" cellpadding="3">
                 <thead>
                     <tr>
-                        <th colspan="2">Login</th>
+                        <th colspan="2">Loginnnn</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Enter Username</td>
+                        <td>Username</td>
                         <td><input type="text" name="userName" value="" /></td>
                     </tr>
                     <tr>
